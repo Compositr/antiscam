@@ -56,9 +56,7 @@ export default async function handler(
   const query = await prisma.scamServer.findMany({
     take: 10,
     skip: req.query.cursor ? 1 : 0,
-    cursor: {
-      id: req.query.cursor || undefined,
-    },
+    cursor: req.query.cursor ? { id: req.query.cursor } : undefined,
 
     where: {
       id: req.query.id || undefined,
@@ -68,11 +66,12 @@ export default async function handler(
     },
   });
 
+
   return res.status(200).json({
     message: "Success",
     data: {
       query,
-      cursor: query[9].id,
+      cursor: query.at(-1),
     },
   });
 }
