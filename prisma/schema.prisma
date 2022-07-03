@@ -6,6 +6,32 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
+}
+
+model ScamServer {
+  id        String         @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  size      ScamServerSize
+  invites   String[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @default(now())
+  serverId  String
+}
+
+enum ScamServerSize {
+  TINY
+  SMALL
+  MEDIUM
+  LARGE
+  OPERATION
+}
+
+model APIUser {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  apiKey    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
