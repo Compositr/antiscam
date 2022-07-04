@@ -17,7 +17,7 @@ model ScamServer {
   invites   String[]
   createdAt DateTime       @default(now())
   updatedAt DateTime       @default(now())
-  serverId  String
+  serverId  String @unique
 }
 
 enum ScamServerSize {
@@ -31,7 +31,7 @@ enum ScamServerSize {
 model APIUser {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name      String
-  apiKey    String
+  apiKey    String @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
