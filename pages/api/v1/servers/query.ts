@@ -63,9 +63,13 @@ export default async function handler(
       name: req.query.name || undefined,
       size: (req.query.size as any) || undefined,
       serverId: req.query.serverId || undefined,
+      invites: req.query.invites?.length
+        ? {
+            hasSome: req.query.invites || undefined,
+          }
+        : undefined,
     },
   });
-
 
   return res.status(200).json({
     message: "Success",
