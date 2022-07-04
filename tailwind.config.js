@@ -8,4 +8,14 @@ module.exports = {
     extend: {},
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    styled: true,
+    themes: ["night", "light"],
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: false,
+    prefix: "",
+    darkTheme: "night",
+  },
 };
