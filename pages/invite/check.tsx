@@ -33,15 +33,16 @@ export default function Check() {
       cursor?: ScamServer;
     }>
   > =>
-    fetch(`/api/v1/servers/query?invites=${invite}`).then((res) => res.json());
+    fetch(`/api/v1/servers/query?serverId=${invite}`).then((res) => res.json());
 
   const { isLoading, isError, error, data } = useQuery(
     ["check", text?.[0] ?? ""],
     () => fetchCheck(text?.[0] ?? "")
   );
 
-  const dbQuery = useQuery(["database", text?.[0] ?? ""], () =>
-    fetchDatabase(text?.[0] ?? "")
+  const dbQuery = useQuery(
+    ["database", (data as DiscordInviteType)?.guild?.id ?? ""],
+    () => fetchDatabase((data as DiscordInviteType)?.guild?.id ?? "" ?? "")
   );
 
   useEffect(() => {
