@@ -36,27 +36,25 @@ export default function Home() {
     );
 
   return (
-    <>
-      <div className="flex justify-center items-center flex-col">
-        <div className="flex flex-row flex-wrap gap-4 justify-evenly">
-          {data?.pages.map(({ data }) =>
-            data.query.map((server: any) => (
-              <ScamServerComponent key={server.id} {...server} />
-            ))
-          )}
-        </div>
-        <button
-          onClick={() => fetchNextPage()}
-          disabled={!hasNextPage || isFetchingNextPage}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-auto mt-2 disabled:opacity-50"
-        >
-          {isFetchingNextPage
-            ? "Loading..."
-            : hasNextPage
-            ? "Load More"
-            : "All loaded"}
-        </button>
+    <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-row flex-wrap gap-4 mx-4 justify-evenly">
+        {data?.pages.map(({ data }) =>
+          data.query.map((server: any) => (
+            <ScamServerComponent key={server.id} {...server} />
+          ))
+        )}
       </div>
-    </>
+      <button
+        onClick={() => fetchNextPage()}
+        disabled={!hasNextPage || isFetchingNextPage}
+        className={`btn btn-primary btn-wide ${isFetching ? "loading" : ""} mt-4`}
+      >
+        {isFetchingNextPage
+          ? "Loading..."
+          : hasNextPage
+          ? "Load More"
+          : "All loaded"}
+      </button>
+    </div>
   );
 }
