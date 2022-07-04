@@ -9,14 +9,19 @@ import {
 
 export default function Check() {
   const [invite, setInvite] = useState<string>("");
-  const [isValid, setIsValid] = useState(false);
+  const [parsed, setParsed] = useState<string>("");
 
   const regex = useMemo(
     () =>
       /(?<=(https?:\/\/)?(www.)?(discord.(gg|io|me|li)|discordapp.com\/invite)\/)[^\s\/]+?(?=\b)/,
     []
   );
-  const text = useMemo(() => regex.exec(invite), [invite, regex]);
+
+  useEffect(() => {
+    const text = regex.exec(invite);
+    if (regex.test(invite)) return setParsed(text?.[0] ?? "");
+    return setParsed(invite);
+  }, [regex, invite]);
 
   const fetchCheck = (
     invite: string
@@ -26,18 +31,20 @@ export default function Check() {
     );
 
   const fetchDatabase = (
-    invite: string
+    serverId: string
   ): Promise<
     StandardResponse<{
       query: ScamServer[];
       cursor?: ScamServer;
     }>
   > =>
-    fetch(`/api/v1/servers/query?serverId=${invite}`).then((res) => res.json());
+    fetch(`/api/v1/servers/query?serverId=${serverId}`).then((res) =>
+      res.json()
+    );
 
   const { isLoading, isError, error, data } = useQuery(
-    ["check", text?.[0] ?? ""],
-    () => fetchCheck(text?.[0] ?? "")
+    ["check", parsed ?? ""],
+    () => fetchCheck(parsed ?? "")
   );
 
   const dbQuery = useQuery(
@@ -45,29 +52,16 @@ export default function Check() {
     () => fetchDatabase((data as DiscordInviteType)?.guild?.id ?? "" ?? "")
   );
 
-  useEffect(() => {
-    if (regex.test(invite ?? "")) return setIsValid(true);
-    return setIsValid(false);
-  }, [invite, regex]);
-
   return (
     <div className="flex justify-center items-center flex-col">
       <div className="form-control">
         <input
           type="text"
-          className="input input-bordered w-full max-w-sm"
+          className="input input-bordered w-full max-w-sm my-2"
           placeholder="Invite"
           onChange={(e) => setInvite(e.target.value)}
           value={invite}
         />
-        <p
-          className={`${
-            isValid && invite.length !== 0 ? "invisible" : "visible"
-          } peer-invalid:visible text-red-500 mt-1 label`}
-        >
-          Invalid invite. Discord invites begin with{" "}
-          <span className="font-mono label">discord.gg/</span>
-        </p>
       </div>
       {!invite.length ? (
         "Waiting for invite..."
