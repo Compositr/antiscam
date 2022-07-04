@@ -13,8 +13,8 @@ export default function ScamServerComponent({
     TINY: "badge-success",
     SMALL: "badge-info",
     MEDIUM: "badge-warning",
-    LARGE: "badge-danger",
-    OPERATION: "badge-outline badge-danger",
+    LARGE: "badge-error",
+    OPERATION: "badge-outline badge-error",
   };
   return (
     <div className="card w-96 bg-base-100 shadow-xl border">
