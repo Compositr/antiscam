@@ -94,7 +94,7 @@ export default function Check() {
               ))}
           </div>
           <div className="flex flex-col mt-4">
-            <span className="font-semibold text-lg mb-2">Link Creater</span>
+            <span className="font-semibold text-lg mb-2">Link Creator</span>
             <span>
               {data?.inviter?.username ?? "SYSTEM"}
               <span className="font-mono">
