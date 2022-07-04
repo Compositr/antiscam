@@ -9,7 +9,7 @@ export default function Partners(props: { partners: PartneredServer[] }) {
     <div className="flex flex-col justify-center items-center">
       <h1 className="text-2xl font-bold mb-4">Partners</h1>
 
-      <div className="flex flex-row justify-center items-center gap-4">
+      <div className="flex flex-row flex-wrap justify-center items-center gap-4">
         {partners.map((p) => (
           <PartnerCard key={p.id} {...p} />
         ))}
