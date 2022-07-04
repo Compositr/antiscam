@@ -9,14 +9,51 @@ export default function ScamServerComponent({
   serverId,
   size,
 }: ScamServer) {
+  const sizeCheck = {
+    TINY: "badge-success",
+    SMALL: "badge-info",
+    MEDIUM: "badge-warning",
+    LARGE: "badge-danger",
+    OPERATION: "badge-outline badge-danger",
+  };
   return (
-    <div className="border shadow-lg p-4 rounded-xl flex flex-col justify-center sm:justify-start">
-      <span className="text-lg font-bold inline-block">{name}</span>
-      <span className="text-gray-500 text-sm inline-block">{id}</span>
-      <br />
-      <div className="mt-auto flex flex-row justify-between gap-6">
-        <span className="text-sm inline-block font-mono">ID: {serverId}</span>
-        <span className="text-sm inline-block">Size: {size}</span>
+    <div className="card w-96 bg-base-100 shadow-xl border">
+      <div className="card-body">
+        <h2 className="card-title leading-tight">{name}</h2>
+        <p className="leading-tight text-sm text-secondary">
+          ID: {serverId}
+          <br />
+          DBID: {id}
+        </p>
+        <div className="flex flex-row flex-wrap gap-1">
+          <span className={`badge ${sizeCheck[size]}`}>
+            {size.toLowerCase()}
+          </span>
+          <span
+            className={`badge ${
+              invites.length === 0
+                ? "badge-warning"
+                : invites.length > 3
+                ? "badge-info"
+                : "badge-neutral"
+            }`}
+          >
+            {invites.length} invites
+          </span>
+        </div>
+        <div className="card-actions justify-end">
+          {invites.map((i) => (
+            <a
+              href={`https://discord.gg/${i}`}
+              key={i}
+              className="btn btn-sm"
+              target={"_blank"}
+              rel="noreferrer"
+            >
+              Invite {i}
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );
