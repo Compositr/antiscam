@@ -51,24 +51,26 @@ export default function Check() {
 
   return (
     <div className="flex justify-center items-center flex-col">
-      <div className="w-full max-w-sm">
+      <div className="form-control">
         <input
           type="text"
-          className="text-center min-w-full mx-2 sm:mx-0 invalid:ring-1 invalid:ring-red-500 peer"
+          className="input input-bordered w-full max-w-sm"
           placeholder="Invite"
           onChange={(e) => setInvite(e.target.value)}
           value={invite}
         />
         <p
           className={`${
-            isValid ? "invisible" : "visible"
-          } peer-invalid:visible text-red-500`}
+            isValid && invite.length !== 0 ? "invisible" : "visible"
+          } peer-invalid:visible text-red-500 mt-1 label`}
         >
           Invalid invite. Discord invites begin with{" "}
-          <span className="font-mono">discord.gg/</span>
+          <span className="font-mono label">discord.gg/</span>
         </p>
       </div>
-      {!invite.length ? "Waiting for invite..." : isLoading || (data?.code as any) === 0 ? (
+      {!invite.length ? (
+        "Waiting for invite..."
+      ) : isLoading || (data?.code as any) === 0 ? (
         <div>Loading...</div>
       ) : isError || data?.code === 10006 ? (
         <div>Error! Please double check your invite link</div>
@@ -117,7 +119,8 @@ export default function Check() {
                 ) : (
                   <div>
                     <span className="text-lg font-semibold block">
-                      {dbQuery.data?.data.query[0].name}
+                      {dbQuery.data?.data.query[0].name}{" "}
+                      <span className="badge badge-warning">Scam Server</span>
                     </span>
                     <span className="text-sm text-gray-500">
                       {dbQuery.data?.data.query[0].id}
@@ -125,7 +128,8 @@ export default function Check() {
                     <span className="mt-2 block">
                       Added to DB on{" "}
                       {new Date(
-                        dbQuery.data?.data.query[0]?.createdAt as unknown as string
+                        dbQuery.data?.data.query[0]
+                          ?.createdAt as unknown as string
                       ).toUTCString()}
                     </span>
                   </div>
