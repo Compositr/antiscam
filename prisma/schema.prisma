@@ -17,7 +17,18 @@ model ScamServer {
   invites   String[]
   createdAt DateTime       @default(now())
   updatedAt DateTime       @default(now())
-  serverId  String @unique
+  serverId  String         @unique
+}
+
+model PartneredServer {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String   @unique
+  invite      String   @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  partnered   Boolean? @default(false)
+  description String
+  serverId    String
 }
 
 enum ScamServerSize {
@@ -31,7 +42,7 @@ enum ScamServerSize {
 model APIUser {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name      String
-  apiKey    String @unique
+  apiKey    String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }

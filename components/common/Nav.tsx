@@ -39,6 +39,9 @@ export default function Nav() {
             <li>
               <Link href={"/invite/check"}>Check Invite</Link>
             </li>
+            <li>
+              <Link href={"/servers/partners"}>Partners</Link>
+            </li>
           </ul>
         </div>
         <Link passHref href={"/"}>
@@ -53,10 +56,17 @@ export default function Nav() {
           <li className="mx-1">
             <Link href={"/invite/check"}>Check Invite</Link>
           </li>
+          <li className="mx-1">
+            <Link href={"/servers/partners"}>Partners</Link>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <button data-set-theme="dark" data-act-class="ACTIVECLASS" className="mx-2">
+        <button
+          data-set-theme="dark"
+          data-act-class="ACTIVECLASS"
+          className="mx-2"
+        >
           <svg
             className="swap-off fill-current w-10 h-10"
             xmlns="http://www.w3.org/2000/svg"
