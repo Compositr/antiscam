@@ -68,7 +68,7 @@ export default function Check() {
           <span className="font-mono">discord.gg/</span>
         </p>
       </div>
-      {isLoading || (data?.code as any) === 0 ? (
+      {!invite.length ? "Waiting for invite..." : isLoading || (data?.code as any) === 0 ? (
         <div>Loading...</div>
       ) : isError || data?.code === 10006 ? (
         <div>Error! Please double check your invite link</div>
