@@ -20,7 +20,7 @@ function App({ Component, pageProps }: AppProps) {
         <meta property="og:locale" content="en_AU" />
         <meta property="og:site_name" content="Scam DB" />
         <meta
-          property="og:image"
+          property="twitter:card"
           content="https://cdn.discordapp.com/attachments/911812235276472331/993424410679717968/Scam_Database_1.png"
         />
       </Head>
