@@ -18,6 +18,9 @@ model ScamServer {
   createdAt DateTime       @default(now())
   updatedAt DateTime       @default(now())
   serverId  String         @unique
+  // APIUser ID
+  // If blank, assume created by SYSTEM
+  createdBy APIUser?       @relation(fields: [id], references: [id])
 }
 
 model PartneredServer {
@@ -39,10 +42,19 @@ enum ScamServerSize {
   OPERATION
 }
 
+enum UserPermissions {
+  READ
+  WRITE // Includes update privs
+  // If the createdBy field is blank, assume created by SYSTEM
+  // Only system can delete when created by SYSTEM
+  DELETE // Remove other people's db submissions
+}
+
 model APIUser {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  apiKey    String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  userId     String       @unique
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @default(now())
+  ScamServer ScamServer[]
 }
