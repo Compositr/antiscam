@@ -19,8 +19,9 @@ function App({ Component, pageProps }: AppProps) {
         <meta property="og:determiner" content="the" />
         <meta property="og:locale" content="en_AU" />
         <meta property="og:site_name" content="Scam DB" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta
-          property="twitter:image"
+          property="twitter:image:src"
           content="https://cdn.discordapp.com/attachments/911812235276472331/993424410679717968/Scam_Database_1.png"
         />
       </Head>
