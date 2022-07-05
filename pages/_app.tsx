@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Nav from "../components/common/Nav";
+import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 
 const queryClient = new QueryClient();
@@ -25,8 +26,10 @@ function App({ Component, pageProps }: AppProps) {
           content="https://cdn.discordapp.com/attachments/911812235276472331/993424410679717968/Scam_Database_1.png"
         />
       </Head>
-      <Nav />
-      <Component {...pageProps} />
+      <SessionProvider session={pageProps.session}>
+        <Nav />
+        <Component {...pageProps} />
+      </SessionProvider>
       <ReactQueryDevtools />
     </QueryClientProvider>
   );
