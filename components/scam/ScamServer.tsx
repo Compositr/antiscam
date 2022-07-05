@@ -41,9 +41,9 @@ export default function ScamServerComponent({
           >
             {invites.length} invites
           </span>
-          {!isActive ? <span className="badge badge-success">
-            Inactive
-          </span> : null}
+          {isActive === true ? null : (
+            <span className="badge badge-success">Inactive</span>
+          )}
         </div>
         <div className="card-actions justify-end">
           {invites.map((i) => (
