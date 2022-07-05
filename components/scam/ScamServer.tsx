@@ -8,6 +8,7 @@ export default function ScamServerComponent({
   name,
   serverId,
   size,
+  isActive,
 }: ScamServer) {
   const sizeCheck = {
     TINY: "badge-success",
@@ -40,6 +41,9 @@ export default function ScamServerComponent({
           >
             {invites.length} invites
           </span>
+          {!isActive ? <span className="badge badge-success">
+            Inactive
+          </span> : null}
         </div>
         <div className="card-actions justify-end">
           {invites.map((i) => (
