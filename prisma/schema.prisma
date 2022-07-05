@@ -18,6 +18,7 @@ model ScamServer {
   createdAt DateTime       @default(now())
   updatedAt DateTime       @default(now())
   serverId  String         @unique
+  isActive  Boolean        @default(true)
   // APIUser ID
   // If blank, assume created by SYSTEM
   createdBy APIUser?       @relation(fields: [id], references: [id])
