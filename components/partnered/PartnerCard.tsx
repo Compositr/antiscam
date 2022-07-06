@@ -11,10 +11,10 @@ export default function PartnerCard({
   image,
 }: PartneredServer) {
   return (
-    <div className="card w-96 h-96 bg-base-100 shadow-xl border flex-1">
+    <div className="card w-72 md:w-96 h-96 bg-base-100 shadow-xl border md:flex-1">
       {image ? (
         <figure>
-          <Image src={image} alt={`Server banner for ${name}`} layout="intrinsic" width={240} height={135}/>
+          <Image src={image} alt={`Server banner for ${name}`} layout="intrinsic" width={500} height={200}/>
         </figure>
       ) : null}
 
