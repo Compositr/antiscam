@@ -14,7 +14,15 @@ export default function PartnerCard({
     <div className="card w-72 md:w-96 h-96 bg-base-100 shadow-xl border md:flex-1">
       {image ? (
         <figure>
-          <Image src={image} alt={`Server banner for ${name}`} layout="intrinsic" width={500} height={200}/>
+          <a href={invite} rel="noreferrer" target={"_blank"}>
+            <Image
+              src={image}
+              alt={`Server banner for ${name}`}
+              layout="intrinsic"
+              width={500}
+              height={200}
+            />
+          </a>
         </figure>
       ) : null}
 
