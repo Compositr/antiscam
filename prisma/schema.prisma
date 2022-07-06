@@ -33,6 +33,7 @@ model PartneredServer {
   partnered   Boolean? @default(false)
   description String
   serverId    String
+  image       String?
 }
 
 enum ScamServerSize {
