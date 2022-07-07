@@ -48,7 +48,7 @@ export default function Check() {
   );
 
   const dbQuery = useQuery(
-    ["database", (data as DiscordInviteType)?.guild?.id ?? ""],
+    ["database", (data as DiscordInviteType)?.guild?.id ?? "THIS_IS_A_FAKE_ID"],
     () => fetchDatabase((data as DiscordInviteType)?.guild?.id ?? "" ?? "")
   );
 
