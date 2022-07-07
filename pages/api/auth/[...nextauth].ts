@@ -1,5 +1,8 @@
 import NextAuth from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { prisma } from "../../../lib/db";
+
 export default NextAuth({
   providers: [
     DiscordProvider({
@@ -7,4 +10,6 @@ export default NextAuth({
       clientSecret: process.env.DISCORD_CLIENT_SECRET!,
     }),
   ],
+
+  adapter: PrismaAdapter(prisma),
 });

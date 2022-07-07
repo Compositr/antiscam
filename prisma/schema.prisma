@@ -19,9 +19,9 @@ model ScamServer {
   updatedAt DateTime       @default(now())
   serverId  String         @unique
   isActive  Boolean        @default(true)
-  // APIUser ID
+  // User ID
   // If blank, assume created by SYSTEM
-  createdBy APIUser?       @relation(fields: [id], references: [id])
+  createdBy User?          @relation(fields: [id], references: [id])
 }
 
 model ReportedServer {
@@ -62,11 +62,53 @@ enum UserPermissions {
   DELETE // Remove other people's db submissions
 }
 
-model APIUser {
-  id         String       @id @default(auto()) @map("_id") @db.ObjectId
-  name       String
-  userId     String       @unique
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime     @default(now())
-  ScamServer ScamServer[]
+model User {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @default(now())
+  ScamServer    ScamServer[]
+  Account       Account[]
+  Session       Session[]
+  email         String?      @unique
+  emailVerified DateTime?
+  image         String?
+}
+
+// Next-Auth
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id])
+}
+
+model VerificationToken {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
