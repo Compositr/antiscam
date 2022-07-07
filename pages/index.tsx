@@ -53,7 +53,7 @@ export default function Home() {
           ? "Loading..."
           : hasNextPage
           ? "Load More"
-          : "All loaded"}
+          : "You've reached the end!"}
       </button>
     </div>
   );
