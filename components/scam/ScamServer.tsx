@@ -18,7 +18,7 @@ export default function ScamServerComponent({
     OPERATION: "badge-outline badge-error",
   };
   return (
-    <div className="card w-96 bg-base-100 shadow-xl border">
+    <div className="card w-72 md:w-96 bg-base-100 shadow-xl border">
       <div className="card-body">
         <h2 className="card-title leading-tight">{name}</h2>
         <p className="leading-tight text-sm text-secondary">
