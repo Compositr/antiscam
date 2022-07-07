@@ -59,6 +59,7 @@ enum UserPermissions {
   WRITE // Includes update privs
   // If the createdBy field is blank, assume created by SYSTEM
   // Only system can delete when created by SYSTEM
+  // Users can always delete their own
   DELETE // Remove other people's db submissions
 }
 
@@ -111,4 +112,12 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model AllowedUser {
+  id          String          @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String          @unique
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @default(now())
+  permissions UserPermissions @default(READ)
 }
