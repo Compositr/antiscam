@@ -50,7 +50,7 @@ export default function ScamServerComponent({
             <a
               href={`https://discord.gg/${i}`}
               key={i}
-              className="btn btn-sm"
+              className="btn normal-case btn-sm"
               target={"_blank"}
               rel="noreferrer"
             >
