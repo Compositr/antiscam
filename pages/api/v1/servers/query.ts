@@ -60,7 +60,11 @@ export default async function handler(
 
     where: {
       id: req.query.id || undefined,
-      name: req.query.name || undefined,
+      name: req.query.name
+        ? {
+            contains: req.query.name,
+          }
+        : undefined,
       size: (req.query.size as any) || undefined,
       serverId: req.query.serverId || undefined,
       invites: req.query.invites?.length
