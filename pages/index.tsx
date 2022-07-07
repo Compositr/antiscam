@@ -30,7 +30,7 @@ export default function Home() {
     return (
       <div>
         <span>
-          Oops! There was an error. Refresh and try again, or open a ticket
+          Oops! There was an error. Refresh and try again!
         </span>
       </div>
     );
