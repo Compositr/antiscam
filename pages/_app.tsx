@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import Nav from "../components/common/Nav";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
+import { useEffect, useRef, useState } from "react";
 
 const queryClient = new QueryClient();
 
@@ -27,8 +28,10 @@ function App({ Component, pageProps }: AppProps) {
         />
       </Head>
       <SessionProvider session={pageProps.session}>
-        <Nav />
-        <Component {...pageProps} />
+        <div data-theme="night">
+          <Nav />
+          <Component {...pageProps} />
+        </div>
       </SessionProvider>
       <ReactQueryDevtools />
     </QueryClientProvider>
