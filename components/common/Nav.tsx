@@ -1,6 +1,8 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { themeChange } from "theme-change";
 
 export default function Nav() {
@@ -8,6 +10,8 @@ export default function Nav() {
   useEffect(() => {
     themeChange(false);
   }, []);
+
+  const { data, status } = useSession();
 
   return (
     <div className="navbar bg-base-100">
@@ -85,8 +89,21 @@ export default function Nav() {
           </svg>
         </button>
         <Link href={"/invite/check"} passHref>
-          <button className="btn btn-primary">Check Invite</button>
+          <button className="btn btn-primary mr-2">Check Invite</button>
         </Link>
+        {!data || status !== "authenticated" ? (
+          <Link href={"/api/auth/signin"} passHref>
+            <span className="btn btn-secondary ml-2">Login</span>
+          </Link>
+        ) : (
+            <Image
+              src={data.user?.image!}
+              alt="Your profile picture"
+              width={50}
+              height={50}
+              layout="fixed"
+            />
+        )}
       </div>
     </div>
   );
