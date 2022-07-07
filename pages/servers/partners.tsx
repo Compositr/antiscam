@@ -1,7 +1,7 @@
 import { PartneredServer } from "@prisma/client";
 import { GetServerSideProps } from "next";
 import PartnerCard from "../../components/partnered/PartnerCard";
-import { prisma } from "../../lib/db";
+import { prisma } from "../../lib/prisma";
 
 export default function Partners(props: { partners: PartneredServer[] }) {
   const { partners } = props;

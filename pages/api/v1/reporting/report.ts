@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import StandardResponse from "../../../../typings/api/StandardResponse";
-import { prisma } from "../../../../lib/db";
+import { prisma } from "../../../../lib/prisma";
 
 export default async function handler(
   req: NextApiRequest,
