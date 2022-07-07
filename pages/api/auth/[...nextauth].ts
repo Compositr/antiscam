@@ -10,6 +10,17 @@ export default NextAuth({
       clientSecret: process.env.DISCORD_CLIENT_SECRET!,
     }),
   ],
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      await prisma.$connect();
+      const doc = prisma.allowedUser.findFirst({
+        where: {
+          userId: account.providerAccountId,
+        },
+      });
+      return !!doc;
+    },
+  },
 
   adapter: PrismaAdapter(prisma),
 });
