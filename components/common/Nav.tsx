@@ -102,6 +102,7 @@ export default function Nav() {
             width={50}
             height={50}
             layout="fixed"
+            className="mask mask-circle"
           />
         )}
       </div>
