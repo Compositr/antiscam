@@ -24,6 +24,16 @@ model ScamServer {
   createdBy APIUser?       @relation(fields: [id], references: [id])
 }
 
+model ReportedServer {
+  id        String         @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  invites   String[]
+  size      ScamServerSize
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @default(now())
+  serverId  String         @unique
+}
+
 model PartneredServer {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   name        String   @unique
